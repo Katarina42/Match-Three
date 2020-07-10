@@ -2,66 +2,149 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
-[CustomEditor(typeof(Level))]
-public class LevelEditor : Editor
+public class LevelEditor : EditorWindow
 {
-    private Level level;
+    public LevelData level;
     public TileData[,] tiles;
     private bool initialized;
+
+    [MenuItem("Window/Level editor")]
+    static void Init()
+    {
+        LevelEditor window = (LevelEditor)EditorWindow.GetWindow(typeof(LevelEditor));
+        window.Show();
+    }
+
 
     private void OnEnable()
     {
         initialized = false;
     }
 
-    public override void OnInspectorGUI()
+    public void OnGUI()
     {
-       
-        EditorStyles.boldLabel.normal.textColor = Color.magenta;
-        EditorStyles.boldLabel.fontSize = 13;
+        level = ((LevelData)EditorGUILayout.ObjectField(level, typeof(LevelData), false));
 
-        base.OnInspectorGUI();
-        level = (Level)target;
-        GUIStyle titleStyle = new GUIStyle();
-        titleStyle.fontStyle = FontStyle.Bold;
-        titleStyle.fontSize = 13;
-        titleStyle.normal.textColor= Color.magenta;
-
-     
-
-
-        if (!level.random && level.boardWidth>=3 && level.boardHeight>=3)
+        if ( level == null)
         {
-            EditorGUILayout.Space();
-            EditorGUILayout.PrefixLabel("Board setup:", EditorStyles.label, titleStyle);
-            EditorGUILayout.BeginVertical();
+            return;
+        }
 
-            if (!initialized)
+
+        if (!level.randomize)
+        {
+            //initialize tile board if there are already stored data , if not make new one
+            if (level.boardTiles != null && level.boardTiles.Length == level.boardWidth*level.boardHeight)
+            {
+                GetLevelBoard();
+                initialized = true;
+            }
+            else if (!initialized)
             {
                 tiles = new TileData[level.boardHeight, level.boardWidth];
                 initialized = true;
             }
 
-            for (int i = 0; i < level.boardHeight; i++)
-            {
-                EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.Space();
+            EditorGUILayout.PrefixLabel("Board setup:");
 
-                for (int j = 0; j < level.boardWidth; j++)
-                {
-                    tiles[i,j]=( (TileData)EditorGUILayout.ObjectField(tiles[i,j], typeof(TileData), false));
-                }
-                EditorGUILayout.EndHorizontal();
-                EditorGUILayout.Space();
+            CreateBoard();
+
+            if (level.boardTiles != null && GUILayout.Button("Start preview"))
+            {
+                StartLevelPreview();
             }
 
-            EditorGUILayout.EndVertical();
+            if (level.boardTiles != null && GUILayout.Button("End preview"))
+            {
+                EndLevelPreview();
+            }
+
         }
 
-        
-        
     }
 
-  
-   
+
+    private void SetLevelBoard()
+    {
+        level.boardTiles = new TileData[level.boardWidth * level.boardHeight];
+
+        for (int i = 0; i < level.boardHeight; i++)
+        {
+            for (int j = 0; j < level.boardWidth; j++)
+            {
+
+                level.boardTiles[j+i*level.boardWidth]= tiles[i, j];
+            }
+
+        }
+
+    }
+
+    private void GetLevelBoard()
+    {
+        tiles = new TileData[level.boardHeight, level.boardWidth];
+
+        for (int i = 0; i < level.boardHeight; i++)
+        {
+            for (int j = 0; j < level.boardWidth; j++)
+            {
+
+                tiles[i, j] = level.boardTiles[j + i * level.boardWidth];
+            }
+
+        }
+
+    }
+
+    private void CreateBoard()
+    {
+        EditorGUILayout.BeginVertical();
+        bool assigned = true;
+
+        for (int i = 0; i < level.boardHeight; i++)
+        {
+            EditorGUILayout.BeginHorizontal();
+
+            for (int j = 0; j < level.boardWidth; j++)
+            {
+                tiles[i, j] = ((TileData)EditorGUILayout.ObjectField(tiles[i, j], typeof(TileData), false));
+                if (tiles[i, j] == null)
+                    assigned = false;
+            }
+
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.Space();
+        }
+
+        EditorGUILayout.EndVertical();
+
+        if (assigned)
+            SetLevelBoard();
+
+    }
+
+    private void StartLevelPreview()
+    {
+        GameObject levelObj = Instantiate(level.levelPrefab);
+        GameObject board = GameObject.FindWithTag("Board");
+
+        for(int i=0;i<level.boardTiles.Length;i++)
+        {
+            GameObject tile= Instantiate(level.tilePrefab, board.transform);
+            tile.GetComponent<Tile>().data = level.boardTiles[i];
+            tile.GetComponent<Image>().sprite = level.boardTiles[i].image;
+        }
+    }
+
+    private void EndLevelPreview()
+    {
+        GameObject board = GameObject.FindWithTag("Level");
+
+        if (board != null)
+            DestroyImmediate(board);
+    }
+
 }

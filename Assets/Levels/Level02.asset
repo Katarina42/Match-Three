@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a0f46629f989064483ceea3f18c11e4, type: 3}
+  m_Name: Level02
+  m_EditorClassIdentifier: 
+  level: 2
+  tilePrefab: {fileID: 7417494159829242327, guid: a25bf4397116b4f48bfc64cb70dae08d,
+    type: 3}
+  levelPrefab: {fileID: 6451068404923532356, guid: fbaf1fb283c9cce42809ad30175e5d5d,
+    type: 3}
+  randomize: 0
+  boardWidth: 5
+  boardHeight: 4
+  targetTiles: []
+  maximumMoves: 0
+  targetPoens: 0
+  boardTiles: []
