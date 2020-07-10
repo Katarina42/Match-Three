@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public TileInfo info;
+    public TileData info;
     
 }

@@ -31,6 +31,6 @@ public class Level : MonoBehaviour
 [System.Serializable]
 public struct Target
 {
-    public TileInfo tile;
+    public TileData tile;
     public uint numberOfTiles;
 }
