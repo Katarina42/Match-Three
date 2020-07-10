@@ -7,11 +7,17 @@ using UnityEngine;
 public class LevelEditor : Editor
 {
     private Level level;
-    public TileInfo obj;
+    public TileData[,] tiles;
+    private bool initialized;
 
+    private void OnEnable()
+    {
+        initialized = false;
+    }
 
     public override void OnInspectorGUI()
     {
+       
         EditorStyles.boldLabel.normal.textColor = Color.magenta;
         EditorStyles.boldLabel.fontSize = 13;
 
@@ -22,7 +28,8 @@ public class LevelEditor : Editor
         titleStyle.fontSize = 13;
         titleStyle.normal.textColor= Color.magenta;
 
-        
+     
+
 
         if (!level.random && level.boardWidth>=3 && level.boardHeight>=3)
         {
@@ -30,13 +37,19 @@ public class LevelEditor : Editor
             EditorGUILayout.PrefixLabel("Board setup:", EditorStyles.label, titleStyle);
             EditorGUILayout.BeginVertical();
 
+            if (!initialized)
+            {
+                tiles = new TileData[level.boardHeight, level.boardWidth];
+                initialized = true;
+            }
+
             for (int i = 0; i < level.boardHeight; i++)
             {
                 EditorGUILayout.BeginHorizontal();
 
                 for (int j = 0; j < level.boardWidth; j++)
                 {
-                    obj = (TileInfo)EditorGUILayout.ObjectField(obj, typeof(TileInfo), false);
+                    tiles[i,j]=( (TileData)EditorGUILayout.ObjectField(tiles[i,j], typeof(TileData), false));
                 }
                 EditorGUILayout.EndHorizontal();
                 EditorGUILayout.Space();
@@ -50,4 +63,5 @@ public class LevelEditor : Editor
     }
 
   
+   
 }
