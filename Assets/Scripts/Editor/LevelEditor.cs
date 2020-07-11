@@ -135,9 +135,15 @@ public class LevelEditor : EditorWindow
         {
             GameObject tile= Instantiate(level.tilePrefab, board.transform);
             tile.GetComponent<Tile>().data = level.boardTiles[i];
-            tile.GetComponent<Image>().sprite = level.boardTiles[i].image;
+            tile.GetComponent<SpriteRenderer>().sprite = level.boardTiles[i].image;
         }
+
+        levelObj.GetComponent<Level>().data = level;
+
+        levelObj.GetComponent<Level>().SetupTiles(board);
     }
+
+
 
     private void EndLevelPreview()
     {

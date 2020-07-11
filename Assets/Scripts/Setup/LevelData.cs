@@ -20,7 +20,7 @@ public class LevelData : ScriptableObject
     [Header("Level goal:")]
     [Tooltip("Target")] [NotNull] public List<Target> targetTiles;
     [Min(0)] public int maximumMoves;
-    [Min(0)] public int targetPoens;
+    [Min(0)] public int targetScore;
 
 
     [HideInInspector] public TileData[] boardTiles;

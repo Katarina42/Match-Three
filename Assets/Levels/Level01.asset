@@ -15,14 +15,14 @@ MonoBehaviour:
   level: 1
   tilePrefab: {fileID: 7417494159829242327, guid: a25bf4397116b4f48bfc64cb70dae08d,
     type: 3}
-  levelPrefab: {fileID: 6451068404923532356, guid: fbaf1fb283c9cce42809ad30175e5d5d,
+  levelPrefab: {fileID: 4605253005676770024, guid: fbaf1fb283c9cce42809ad30175e5d5d,
     type: 3}
   randomize: 0
   boardWidth: 6
   boardHeight: 6
   targetTiles: []
   maximumMoves: 0
-  targetPoens: 0
+  targetScore: 0
   boardTiles:
   - {fileID: 11400000, guid: 9b8fbb1cb3bf7eb409e8a0acda77c70f, type: 2}
   - {fileID: 11400000, guid: f430fe9bfe7938e4e9702ecb05e41290, type: 2}
