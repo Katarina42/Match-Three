@@ -129,28 +129,20 @@ public class LevelEditor : EditorWindow
     private void StartLevelPreview()
     {
         GameObject levelObj = Instantiate(level.levelPrefab);
-        GameObject board = GameObject.FindWithTag("Board");
-
-        for(int i=0;i<level.boardTiles.Length;i++)
-        {
-            GameObject tile= Instantiate(level.tilePrefab, board.transform);
-            tile.GetComponent<Tile>().data = level.boardTiles[i];
-            tile.GetComponent<SpriteRenderer>().sprite = level.boardTiles[i].image;
-        }
 
         levelObj.GetComponent<Level>().data = level;
 
-        levelObj.GetComponent<Level>().SetupTiles(board);
+        levelObj.GetComponent<Level>().SetupTiles();
     }
 
 
 
     private void EndLevelPreview()
     {
-        GameObject board = GameObject.FindWithTag("Level");
+        GameObject level = GameObject.FindWithTag("Level");
 
-        if (board != null)
-            DestroyImmediate(board);
+        if (level != null)
+            DestroyImmediate(level);
     }
 
 }

@@ -92,16 +92,8 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitUntil(() => Loaded);
         LevelData level = levels[index - 1];
-
         GameObject levelObj = Instantiate(level.levelPrefab);
-        GameObject board = GameObject.FindWithTag("Board");
         levelObj.GetComponent<Level>().data = level;
 
-        for (int i = 0; i < level.boardTiles.Length; i++)
-        {
-            GameObject tile = Instantiate(level.tilePrefab, board.transform);
-            tile.GetComponent<Tile>().data = level.boardTiles[i];
-            tile.GetComponent<SpriteRenderer>().sprite = level.boardTiles[i].image;
-        }
     }
 }
