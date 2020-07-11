@@ -12,7 +12,6 @@ public class Level : MonoBehaviour
     {
         GameObject board = GameObject.FindGameObjectWithTag("Board");
         SetupTiles(board);
-        SetupCamera();
     }
 
     public void SetupTiles(GameObject board)
