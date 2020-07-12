@@ -6,12 +6,12 @@ using UnityEngine.EventSystems;
 public class Tile : MonoBehaviour
 {
     public TileData data;
-    public Level level;
+    public static Level level;
+    public Index2D index;
+
     private bool selected;
     private static bool swipe;
-    private const int MIN_MATCH = 3;
 
-    public Index2D index;
 
     private void Awake()
     {
@@ -36,7 +36,6 @@ public class Tile : MonoBehaviour
         {
             SelectTile();
             level.StartLinking(index);
-            
         }
       
     }
@@ -44,16 +43,7 @@ public class Tile : MonoBehaviour
     private void OnMouseUp()
     {
         swipe = false;
-
-        if (level.selectedTiles.Count >= MIN_MATCH)
-        {
-            level.DestroyTiles();
-        }
-        else
-        {
-            level.DeselectTiles();
-
-        }
+        level.EndLinking();
 
     }
 
@@ -61,7 +51,7 @@ public class Tile : MonoBehaviour
 
     public void SelectTile()
     {
-        level.selectedTiles.Add(this);
+        level.AddTile(index.x,index.y);
         selected = true;
         SelectedAnimation();
     }
@@ -69,7 +59,6 @@ public class Tile : MonoBehaviour
     {
         selected = false;
     }
-
     private void SelectedAnimation()
     {
         if(data.scale.Length>0)
@@ -77,11 +66,14 @@ public class Tile : MonoBehaviour
         if (data.rotation.Length > 0)
             StartCoroutine(Rotate(0,data.rotation));
     }
-    public void DestroyTile()
+    public void DestroyTileAnimation()
     {
         StopAllCoroutines();
         StartCoroutine(DestroyTileDelayed());
     }
+
+
+    #region animation
 
     IEnumerator Scale(int index , AnimationData[] scale, bool ignoreSelected=false)
     {
@@ -107,7 +99,6 @@ public class Tile : MonoBehaviour
         else
             this.transform.localScale = Vector3.one;
     }
-
     IEnumerator Rotate(int index, AnimationData[] rotation, bool ignoreSelected=false)
     {
         selected = selected || ignoreSelected;
@@ -132,7 +123,6 @@ public class Tile : MonoBehaviour
         else
          this.transform.localEulerAngles = Vector3.zero;
     }
-
     IEnumerator DestroyTileDelayed()
     {
         ResetAnimation();
@@ -146,7 +136,6 @@ public class Tile : MonoBehaviour
 
         Destroy(this.gameObject);
     }
-
     private void ResetAnimation()
     {
         this.transform.localEulerAngles = Vector3.zero;
@@ -154,4 +143,5 @@ public class Tile : MonoBehaviour
 
     }
 
+    #endregion
 }

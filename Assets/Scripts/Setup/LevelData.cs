@@ -16,6 +16,9 @@ public class LevelData : ScriptableObject
 
     [Min(3)] public int boardWidth = 3;
     [Min(3)] public int boardHeight = 3;
+    [Min(2)] public float emptySpace = 2;
+    [Min(3)] public float minimumMatch = 3;
+
 
     [Header("Level goal:")]
     [Tooltip("Target")] [NotNull] public List<Target> targetTiles;
