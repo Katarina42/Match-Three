@@ -12,12 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0f46629f989064483ceea3f18c11e4, type: 3}
   m_Name: Level03
   m_EditorClassIdentifier: 
+  randomize: 0
+  emptySpace: 2
+  minimumMatch: 3
+  tilePool:
+  - {fileID: 11400000, guid: 9b8fbb1cb3bf7eb409e8a0acda77c70f, type: 2}
+  - {fileID: 11400000, guid: f430fe9bfe7938e4e9702ecb05e41290, type: 2}
+  - {fileID: 11400000, guid: 818fb9fb88b95fd49a078b2ee14a6a7d, type: 2}
   level: 3
   tilePrefab: {fileID: 7417494159829242327, guid: a25bf4397116b4f48bfc64cb70dae08d,
     type: 3}
   levelPrefab: {fileID: 4605253005676770024, guid: fbaf1fb283c9cce42809ad30175e5d5d,
     type: 3}
-  randomize: 0
   boardWidth: 3
   boardHeight: 3
   targetTiles: []
