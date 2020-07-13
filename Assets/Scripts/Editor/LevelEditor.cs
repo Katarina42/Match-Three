@@ -52,15 +52,6 @@ public class LevelEditor : EditorWindow
 
             CreateBoard();
 
-            if (level.boardTiles != null && GUILayout.Button("Start preview"))
-            {
-                StartLevelPreview();
-            }
-
-            if (level.boardTiles != null && GUILayout.Button("End preview"))
-            {
-                EndLevelPreview();
-            }
 
         }
 
@@ -104,11 +95,11 @@ public class LevelEditor : EditorWindow
         EditorGUILayout.BeginVertical();
         bool assigned = true;
 
-        for (int i = 0; i < level.boardWidth; i++)
+        for (int i = 0; i < level.boardHeight; i++)
         {
             EditorGUILayout.BeginHorizontal();
 
-            for (int j = 0; j < level.boardHeight; j++)
+            for (int j = 0; j < level.boardWidth; j++)
             {
                 tiles[i, j] = ((TileData)EditorGUILayout.ObjectField(tiles[i, j], typeof(TileData), false));
                 if (tiles[i, j] == null)
@@ -126,23 +117,5 @@ public class LevelEditor : EditorWindow
 
     }
 
-    private void StartLevelPreview()
-    {
-        GameObject levelObj = Instantiate(level.levelPrefab);
-
-        levelObj.GetComponent<Level>().data = level;
-
-        levelObj.GetComponent<Level>().SetupTiles();
-    }
-
-
-
-    private void EndLevelPreview()
-    {
-        GameObject level = GameObject.FindWithTag("Level");
-
-        if (level != null)
-            DestroyImmediate(level);
-    }
 
 }
