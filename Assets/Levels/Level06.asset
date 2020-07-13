@@ -22,6 +22,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 818fb9fb88b95fd49a078b2ee14a6a7d, type: 2}
   - {fileID: 11400000, guid: c432fcd76ec19dd4fb161b9d963c4614, type: 2}
   - {fileID: 11400000, guid: d0468707ec54868488c3a8edcfba53a3, type: 2}
+  - {fileID: 11400000, guid: 0b782265591e1464eb80babffc392978, type: 2}
   level: 3
   tilePrefab: {fileID: 7417494159829242327, guid: a25bf4397116b4f48bfc64cb70dae08d,
     type: 3}
