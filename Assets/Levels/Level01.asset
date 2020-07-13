@@ -29,9 +29,13 @@ MonoBehaviour:
     type: 3}
   boardWidth: 6
   boardHeight: 6
-  targetTiles: []
-  maximumMoves: 0
-  targetScore: 0
+  targetTiles:
+  - tile: {fileID: 11400000, guid: 9b8fbb1cb3bf7eb409e8a0acda77c70f, type: 2}
+    numberOfTiles: 6
+  - tile: {fileID: 11400000, guid: f430fe9bfe7938e4e9702ecb05e41290, type: 2}
+    numberOfTiles: 3
+  maximumMoves: 15
+  targetScore: 15
   boardTiles:
   - {fileID: 11400000, guid: 9b8fbb1cb3bf7eb409e8a0acda77c70f, type: 2}
   - {fileID: 11400000, guid: f430fe9bfe7938e4e9702ecb05e41290, type: 2}

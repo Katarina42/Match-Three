@@ -26,6 +26,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private bool levelFinished;
+    public bool LevelFinished
+    {
+        get { return levelFinished; }
+        set
+        {
+            if (value)
+            {
+                level++;
+                LoadMenu();
+            }
+
+            levelFinished = value;
+        }
+    }
+
+    public LevelData currentLevelData
+    {
+        get { return levels[level-1]; }
+    }
 
     private void Awake()
     {
@@ -37,7 +57,7 @@ public class GameManager : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this);
-        level = 0;
+        level = 1;
     }
 
     private void Start()
@@ -47,20 +67,23 @@ public class GameManager : MonoBehaviour
 
     public void LoadMenu()
     {
-        LoadSceneAsync("Menu");
-        level++;
+        LoadSceneAsync("Menu",1f);
     }
 
     public void LoadGame()
     {
-        LoadSceneAsync("Game");
+        SceneManager.LoadScene("Game");
         InitializeLevel(level);
+        LevelFinished = false;
     }
 
     public void LoadLevel(int level)
     {
+        this.level = level;
         LoadSceneAsync("Game");
         InitializeLevel(level);
+        LevelFinished = false;
+
     }
 
 
@@ -91,8 +114,7 @@ public class GameManager : MonoBehaviour
     IEnumerator InitializeLevelCoroutine(int index)
     {
         yield return new WaitWhile(() => !Loaded);
-        LevelData level = levels[index - 1];
-        GameObject levelObj = Instantiate(level.levelPrefab);
-        levelObj.GetComponent<Level>().data = level;
+        GameObject levelObj = Instantiate(currentLevelData.levelPrefab);
+        levelObj.GetComponent<Level>().data = currentLevelData;
     }
 }

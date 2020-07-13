@@ -13,10 +13,10 @@ public class Level : MonoBehaviour
     private Stack<TileLink> links;
     private GameObject boardObj;
 
-
     private void Awake()
     {
         boardObj = GameObject.FindWithTag("Board");
+
         links = new Stack<TileLink>();
     }
 

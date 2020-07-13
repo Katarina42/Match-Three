@@ -1,10 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class UiController : MonoBehaviour
 {
-
     public void LoadLevel(int i)
     {
         GameManager.Instance.LoadLevel(i);

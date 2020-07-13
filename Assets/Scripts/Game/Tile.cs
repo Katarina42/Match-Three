@@ -92,6 +92,7 @@ public class Tile : MonoBehaviour
     }
     public void DestroyTileAnimation()
     {
+        UiGameController.UpdateTargets(data);
         ResetAnimation();
         StartCoroutine(DestroyTileDelayed());
     }
