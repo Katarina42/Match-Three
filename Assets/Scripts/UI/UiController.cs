@@ -14,4 +14,14 @@ public class UiController : MonoBehaviour
     {
         GameManager.Instance.LoadGame();
     }
+
+    public void LoadMenu()
+    {
+        GameManager.Instance.LoadMenu();
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }

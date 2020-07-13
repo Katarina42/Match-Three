@@ -15,7 +15,7 @@ MonoBehaviour:
   randomize: 0
   emptySpace: 2
   minimumMatch: 3
-  poolSize: 0
+  poolSize: 60
   tiles:
   - {fileID: 11400000, guid: 9b8fbb1cb3bf7eb409e8a0acda77c70f, type: 2}
   - {fileID: 11400000, guid: f430fe9bfe7938e4e9702ecb05e41290, type: 2}

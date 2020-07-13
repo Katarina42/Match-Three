@@ -5,20 +5,17 @@ using UnityEngine;
 
 public class Level : MonoBehaviour
 {
-    [Header("Level setup:")]
     public LevelData data;
     private const float CAMERA_OFFSET = -0.5F;
     private Tile[,] board;
     private TileIndex[] neighboursIndexes;
-    public List<TileIndex> selectedTiles;
-    public Stack<TileLink> links;
+    private List<TileIndex> selectedTiles;
+    private Stack<TileLink> links;
     private GameObject boardObj;
 
 
     private void Awake()
     {
-        if (data == null)
-            return;
         boardObj = GameObject.FindWithTag("Board");
         links = new Stack<TileLink>();
     }
@@ -71,22 +68,6 @@ public class Level : MonoBehaviour
         Vector3 pos = Camera.main.transform.position;
         Camera.main.transform.position = new Vector3(CAMERA_OFFSET + (float)data.boardWidth % 2 / 2, pos.y, pos.z);
 
-        //mask setup
-        if (Camera.main.transform.childCount != 0)
-        {
-            Camera.main.transform.GetChild(0).localScale = new Vector3(data.boardWidth, data.boardHeight, 1);
-        }
-        else
-        {
-#if UNITY_EDITOR
-
-            Debug.LogWarning("Go to Game scene for preview");
-
-#elif UNITY_STANDALONE || UNITY_IOS || UNITY_ANDROID
-
-            Debug.LogWarning("Mask missing as a child of main camera");
-#endif
-        }
     }
 
     private void SetupNeighboursIndexes()

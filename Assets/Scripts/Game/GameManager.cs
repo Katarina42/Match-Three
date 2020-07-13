@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         LoadMenu();
     }
 
-    private void LoadMenu()
+    public void LoadMenu()
     {
         LoadSceneAsync("Menu");
         level++;
