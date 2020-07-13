@@ -9,6 +9,12 @@
         this.y = y;
     }
 
+    public TileIndex()
+    {
+        this.x = -1;
+        this.y = -1;
+    }
+
     public bool Valid()
     {
         if (x >= 0 && y >= 0)

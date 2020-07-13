@@ -104,11 +104,11 @@ public class LevelEditor : EditorWindow
         EditorGUILayout.BeginVertical();
         bool assigned = true;
 
-        for (int i = 0; i < level.boardHeight; i++)
+        for (int i = 0; i < level.boardWidth; i++)
         {
             EditorGUILayout.BeginHorizontal();
 
-            for (int j = 0; j < level.boardWidth; j++)
+            for (int j = 0; j < level.boardHeight; j++)
             {
                 tiles[i, j] = ((TileData)EditorGUILayout.ObjectField(tiles[i, j], typeof(TileData), false));
                 if (tiles[i, j] == null)

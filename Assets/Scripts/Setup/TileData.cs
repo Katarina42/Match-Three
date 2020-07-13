@@ -9,8 +9,8 @@ public class TileData : ScriptableObject
     [Header("Tile:")]
     public int value;
     public Sprite image;
-    public Sprite backgroundImage;
-    public Color color=Color.white;
+    //public Sprite backgroundImage;
+    //public Color color=Color.white;
 
     [Header("Selected animation:")]
 
@@ -22,9 +22,9 @@ public class TileData : ScriptableObject
     [Header("Destoy animation:")]
     public float destroyDelay;
     public AnimationData[] destroyScale;
-    public GameObject destroyParticles;
-    public Color particlesColor=Color.white;
-    public AnimationCurve particlesCurve;
+    //public GameObject destroyParticles;
+    //public Color particlesColor=Color.white;
+    //public AnimationCurve particlesCurve;
 
 
 }

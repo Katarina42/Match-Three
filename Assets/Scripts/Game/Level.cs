@@ -51,7 +51,10 @@ public class Level : MonoBehaviour
         {
             for (int j = 0; j < data.boardWidth; j++)
             {
-                AddNewTile(new TileIndex(j, i), data.boardTiles[j + i * data.boardWidth]);
+                if(data.randomize)
+                    AddNewTile(new TileIndex(j, i));
+                else
+                    AddNewTile(new TileIndex(j, i), data.boardTiles[j + i * data.boardWidth]);
 
             }
         }
@@ -135,7 +138,17 @@ public class Level : MonoBehaviour
     }
     private void ReshuffleBoard()
     {
+        TileIndex a = new TileIndex();
+        TileIndex b = new TileIndex();
 
+        while (!ValidBoard())
+        {
+            a.x = Random.Range(0, data.boardWidth);
+            a.y= Random.Range(0, data.boardWidth);
+            b.x = Random.Range(0, data.boardWidth);
+            b.y = Random.Range(0, data.boardWidth);
+            SwapTiles(a,b);
+        }
     }
     private bool ValidBoard()
     {
@@ -233,7 +246,6 @@ public class Level : MonoBehaviour
             ReshuffleBoard();
         }
     }
-
     public void DeselectTiles()
     {
         while(selectedTiles.Count>0)
@@ -295,6 +307,12 @@ public class Level : MonoBehaviour
         float bottom_x = -data.boardWidth / 2;
         float bottom_y = -data.boardHeight / 2;
         return new Vector3(bottom_x + index.x, bottom_y + index.y, -2);
+    }
+    private void SwapTiles(TileIndex a, TileIndex b)
+    {
+        Tile temp = board[b.x, b.y];
+        MoveTile(board[a.x, a.y], b);
+        MoveTile(temp, a);
     }
 
     #endregion

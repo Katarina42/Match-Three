@@ -21,7 +21,7 @@ public class UiGameController :MonoBehaviour
 
     public void LoadMenu()
     {
-        GameManager.Instance.LoadMenu();
+        GameManager.Instance.LoadSceneAsync("Menu");
     }
 
     private void SetTargetsUi(LevelData data)

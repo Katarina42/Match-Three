@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a0f46629f989064483ceea3f18c11e4, type: 3}
   m_Name: Level11
   m_EditorClassIdentifier: 
-  randomize: 0
+  randomize: 1
   emptySpace: 2
   minimumMatch: 3
-  poolSize: 60
+  poolSize: 120
   tiles:
   - {fileID: 11400000, guid: 9b8fbb1cb3bf7eb409e8a0acda77c70f, type: 2}
   - {fileID: 11400000, guid: f430fe9bfe7938e4e9702ecb05e41290, type: 2}
@@ -27,11 +27,17 @@ MonoBehaviour:
     type: 3}
   levelPrefab: {fileID: 4605253005676770024, guid: fbaf1fb283c9cce42809ad30175e5d5d,
     type: 3}
-  boardWidth: 3
-  boardHeight: 3
-  targetTiles: []
-  maximumMoves: 15
-  targetScore: 15
+  boardWidth: 8
+  boardHeight: 8
+  targetTiles:
+  - tile: {fileID: 11400000, guid: 9b8fbb1cb3bf7eb409e8a0acda77c70f, type: 2}
+    numberOfTiles: 5
+  - tile: {fileID: 11400000, guid: f430fe9bfe7938e4e9702ecb05e41290, type: 2}
+    numberOfTiles: 6
+  - tile: {fileID: 11400000, guid: 818fb9fb88b95fd49a078b2ee14a6a7d, type: 2}
+    numberOfTiles: 7
+  - tile: {fileID: 11400000, guid: c432fcd76ec19dd4fb161b9d963c4614, type: 2}
+    numberOfTiles: 8
   boardTiles:
   - {fileID: 11400000, guid: 9b8fbb1cb3bf7eb409e8a0acda77c70f, type: 2}
   - {fileID: 11400000, guid: f430fe9bfe7938e4e9702ecb05e41290, type: 2}

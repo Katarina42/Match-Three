@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
+    private const float LOAD_DELAY= 3F;
+
     [Header("Levels:")]
     public LevelData[] levels;
     private int level;
@@ -67,7 +69,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadMenu()
     {
-        LoadSceneAsync("Menu",1f);
+        LoadSceneAsync("Menu", LOAD_DELAY);
     }
 
     public void LoadGame()

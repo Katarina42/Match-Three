@@ -40,22 +40,19 @@ public class Tile : MonoBehaviour
 
         }
     }
-
     private void Awake()
     {
         selected = false;
         swipe = false;
 
     }
-    
-
+   
     private void OnMouseDown()
     {
         swipe = true;
         Selected = true;
 
     }
-
     private void OnMouseEnter()
     {
         if (level.IsNeighbour(index) && swipe)
@@ -74,7 +71,6 @@ public class Tile : MonoBehaviour
         }
 
     }
-
 
     private void OnMouseUp()
     {
@@ -163,7 +159,6 @@ public class Tile : MonoBehaviour
         this.transform.localEulerAngles = Vector3.zero;
         this.transform.localScale = Vector3.one;
     }
-
 
     #endregion
 }
