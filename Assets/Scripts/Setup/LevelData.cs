@@ -11,7 +11,10 @@ public class LevelData : ScriptableObject
     public bool randomize;
     [Min(2)] public float emptySpace = 2;
     [Min(3)] public float minimumMatch = 3;
-    public TileData[] tilePool;
+
+    [Header("Tiles pooler")]
+    [Tooltip("How much tiles in pool beside board size")] [Min(10)] public int poolSize=60;
+    public TileData[] tiles;
 
     [Header("Level board setup:")]
 

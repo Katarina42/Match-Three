@@ -151,7 +151,9 @@ public class Tile : MonoBehaviour
         }
 
         yield return new WaitForSeconds(data.destroyDelay);
-        Destroy(this.gameObject);
+        level.DropTiles(oldIndex);
+        ResetAnimation();
+        TilePooler.Instance.ReturnTileToPool(this.gameObject);
 
     }
     private void ResetAnimation()
@@ -161,11 +163,6 @@ public class Tile : MonoBehaviour
         this.transform.localScale = Vector3.one;
     }
 
-    private void OnDestroy()
-    {
-        if(level!=null && oldIndex!=null)
-            level.DropTiles(oldIndex);
-    }
 
     #endregion
 }

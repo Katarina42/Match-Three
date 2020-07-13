@@ -90,10 +90,9 @@ public class GameManager : MonoBehaviour
 
     IEnumerator InitializeLevelCoroutine(int index)
     {
-        yield return new WaitUntil(() => Loaded);
+        yield return new WaitWhile(() => !Loaded);
         LevelData level = levels[index - 1];
         GameObject levelObj = Instantiate(level.levelPrefab);
         levelObj.GetComponent<Level>().data = level;
-
     }
 }

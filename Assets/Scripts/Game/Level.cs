@@ -17,12 +17,15 @@ public class Level : MonoBehaviour
 
     private void Awake()
     {
+        if (data == null)
+            return;
         boardObj = GameObject.FindWithTag("Board");
         links = new Stack<TileLink>();
     }
 
     private void Start()
     {
+        TilePooler.Instance.Initialize(data.poolSize, data.tilePrefab);
         InitializeLevel();
     }
 
@@ -135,8 +138,6 @@ public class Level : MonoBehaviour
 
         return false;
     }
-
-
     public void EndLinking()
     {
         if (selectedTiles.Count >= data.minimumMatch)
@@ -151,7 +152,6 @@ public class Level : MonoBehaviour
         links.Clear();
         Tile.lastSelected = null;
     }
-
     private void ReshuffleBoard()
     {
 
@@ -184,26 +184,6 @@ public class Level : MonoBehaviour
 
         return false;
     }
-    private bool HaveValidNeighbours(TileIndex index)
-    {
-        bool valid = false;
-        for (int i = 0; i < neighboursIndexes.Length; i++)
-        {
-            int neighbourX = index.x + neighboursIndexes[i].x;
-            int neighbourY = index.y + neighboursIndexes[i].y;
-
-            if (neighbourX < 0 || neighbourX >= data.boardWidth || neighbourY < 0 || neighbourY >= data.boardHeight)
-                continue;
-
-            if (board[index.x, index.y].data == board[neighbourX, neighbourY].data)
-            {
-                valid = true;
-            }
-        }
-
-        return valid;
-    }
-
     private TileIndex GetNeighbour(TileIndex index)
     {
         TileIndex indexNeighbour = new TileIndex(-1, -1);
@@ -227,7 +207,6 @@ public class Level : MonoBehaviour
         return indexNeighbour;
 
     }
-
     public bool IsNeighbour(TileIndex index)
     {
         if (selectedTiles.Count == 0)
@@ -248,8 +227,6 @@ public class Level : MonoBehaviour
         return false;
     }
 
-
-
     #endregion
 
     #region Tiles
@@ -266,7 +243,8 @@ public class Level : MonoBehaviour
                 MoveTile(board[index.x, i], new TileIndex(index.x, i - 1));
             }
         }
-
+        
+        
         AddNewTile(new TileIndex(index.x, data.boardHeight - 1));
 
         if (selectedTiles.Count == 0 && !ValidBoard())
@@ -274,6 +252,7 @@ public class Level : MonoBehaviour
             ReshuffleBoard();
         }
     }
+
     public void DeselectTiles()
     {
         while(selectedTiles.Count>0)
@@ -285,6 +264,7 @@ public class Level : MonoBehaviour
     public void DestroyTiles()
     {
         selectedTiles.Sort((a, b) => b.y.CompareTo(a.y));
+
         while (selectedTiles.Count > 0)
         {
             int x = selectedTiles[0].x;
@@ -297,13 +277,14 @@ public class Level : MonoBehaviour
     }
     private void AddNewTile(TileIndex index, TileData tileData = null)
     {
-        GameObject tileObj = Instantiate(data.tilePrefab, boardObj.transform);
+        GameObject tileObj = TilePooler.Instance.SpawnTile();
+        tileObj.transform.parent=boardObj.transform;
         tileObj.transform.localPosition = GetTilePosition(index);
 
         if (tileData == null)
         {
-            int random = Random.Range(0, data.tilePool.Length-1);
-            tileData = data.tilePool[random];
+            int random = Random.Range(0, data.tiles.Length);
+            tileData = data.tiles[random];
         }
 
         Tile tile = tileObj.GetComponent<Tile>();
