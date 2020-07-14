@@ -108,7 +108,7 @@ public class Tile : MonoBehaviour
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            this.transform.localScale = Vector3.Lerp(start, target * curve.Evaluate(currentTime), currentTime / duration);
+            this.transform.localScale = Vector3.Lerp(start, target , curve.Evaluate( currentTime / duration));
             yield return null;
         }
 
@@ -130,7 +130,7 @@ public class Tile : MonoBehaviour
         while (currentTime < duration)
         {
             currentTime += Time.deltaTime;
-            this.transform.localEulerAngles = Vector3.Lerp(start, target * curve.Evaluate(currentTime), currentTime / duration);
+            this.transform.localEulerAngles = Vector3.Lerp(start, target ,curve.Evaluate( currentTime / duration));
             yield return null;
         }
 
