@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         get { return instance; }
     }
 
-    private const float LOAD_DELAY= 3F;
+    private const float LOAD_DELAY= 1.5F;
 
     [Header("Levels:")]
     public LevelData[] levels;
